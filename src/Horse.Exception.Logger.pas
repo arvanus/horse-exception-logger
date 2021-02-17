@@ -181,7 +181,7 @@ procedure THorseExceptionLogger.AfterConstruction;
 begin
   inherited;
   FLogCache := TList<string>.Create;
-  FEvent := TEvent.Create{$IFDEF FPC}(nil, False, True, 'HORSE_LOGGER'){$ENDIF};
+  FEvent := TEvent.Create{$IFDEF FPC}(nil, False, True, 'HORSE_EXCEPTION_LOGGER'){$ENDIF};
   FCriticalSection := TCriticalSection.Create;
 end;
 
