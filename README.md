@@ -1,4 +1,4 @@
-# horse-logger
+# horse-exception-logger
 Middleware for exception logging in HORSE
 
 ### For install in your project using [boss](https://github.com/HashLoad/boss):
