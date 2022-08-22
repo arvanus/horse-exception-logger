@@ -3,7 +3,7 @@ Middleware for exception logging in HORSE
 
 ### For install in your project using [boss](https://github.com/HashLoad/boss):
 ``` sh
-$ boss install horse-exception-logger
+$ boss install arvanus/horse-exception-logger
 ```
 
 ### Format

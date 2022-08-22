@@ -12,7 +12,7 @@ uses
   {$ELSE}
   System.SysUtils, System.SyncObjs, System.Classes, System.Generics.Collections,
   {$ENDIF}
-  Horse, Horse.HTTP, Horse.Utils.ClientIP;
+  Horse, Horse.Utils.ClientIP;
 
 type
   THorseExceptionLoggerConfig = class
