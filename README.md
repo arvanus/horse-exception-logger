@@ -38,7 +38,7 @@ var
   HorseLoggerConfig: THorseLoggerConfig;
 
 begin
-  HorseLoggerConfig := THorseLoggerConfig.Create('${time} - ${request_method} ${request_path_info} {exception}', '/var/log/horse');
+  HorseLoggerConfig := THorseLoggerConfig.Create('${time} - ${request_method} ${request_path_info} ${exception}', '/var/log/horse');
   THorse.Use(THorseExceptionLogger.New(HorseLoggerConfig));
 
   THorse.Get('/raise',
