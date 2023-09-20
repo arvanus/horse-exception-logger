@@ -35,7 +35,7 @@ Sample Horse Exception Logger with custom log format and log folder
 uses Horse, Horse.Logger;
 
 var
-  HorseLoggerConfig: THorseLoggerConfig;
+  HorseExceptionLoggerConfig: THorseLoggerConfig;
 
 begin
   HorseLoggerConfig := THorseLoggerConfig.Create('${time} - ${request_method} ${request_path_info} ${exception}', '/var/log/horse');
