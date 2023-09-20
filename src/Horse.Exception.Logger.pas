@@ -18,7 +18,9 @@ type
   THorseExceptionLoggerConfig = class
   public
     LogDir: string;
+    writeToConsole:Boolean;
     LogFormat: string;
+    constructor Create(ALogFormat: string; AWriteToConsole:Boolean); overload;
     constructor Create(ALogFormat: string; ALogDir: string); overload;
     constructor Create(ALogFormat: string); overload;
   end;
@@ -168,11 +170,13 @@ constructor THorseExceptionLoggerConfig.Create(ALogFormat: string; ALogDir: stri
 begin
   LogFormat := ALogFormat;
   LogDir := ALogDir;
+  writeToConsole := false;
 end;
 
 constructor THorseExceptionLoggerConfig.Create(ALogFormat: string);
 begin
   Create(ALogFormat, ExtractFileDir(ParamStr(0)));
+  writeToConsole := false;
 end;
 
 { THorseExceptionLogger }
@@ -284,6 +288,16 @@ var
 begin
   FCriticalSection.Enter;
   try
+    if FHorseLoggerConfig.writeToConsole then //Write to console
+    begin
+      LLogCacheArray := ExtractLogCache;
+      for I := Low(LLogCacheArray) to High(LLogCacheArray) do
+      begin
+        writeln(LLogCacheArray[I]);
+      end;
+      exit;
+    end;
+
     if not DirectoryExists(FHorseLoggerConfig.LogDir) then
       ForceDirectories(FHorseLoggerConfig.LogDir);
     LFilename := FHorseLoggerConfig.LogDir + PathDelim + 'error_' + FormatDateTime('yyyy-mm-dd', Now()) + '.log';
@@ -319,7 +333,7 @@ end;
 
 class function THorseExceptionLogger.ValidateValue(AValue: TDateTime): string;
 begin
-  Result := FormatDateTime('dd/MMMM/yyyy hh:mm:ss:zzz', AValue);
+  Result := FormatDateTime('dd/MM/yyyy hh:mm:ss:zzz', AValue);
 end;
 
 class function THorseExceptionLogger.ValidateValue(AValue: string): string;
@@ -332,6 +346,14 @@ end;
 class function THorseExceptionLogger.ValidateValue(AValue: Integer): string;
 begin
   Result := AValue.ToString;
+end;
+
+constructor THorseExceptionLoggerConfig.Create(ALogFormat: string;
+  AWriteToConsole: Boolean);
+begin
+  LogFormat := ALogFormat;
+  LogDir := '';
+  writeToConsole := AWriteToConsole;
 end;
 
 end.

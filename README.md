@@ -38,8 +38,9 @@ var
   HorseExceptionLoggerConfig: THorseLoggerConfig;
 
 begin
-  HorseLoggerConfig := THorseLoggerConfig.Create('${time} - ${request_method} ${request_path_info} ${exception}', '/var/log/horse');
-  THorse.Use(THorseExceptionLogger.New(HorseLoggerConfig));
+  HorseExceptionLoggerConfig := THorseExceptionLoggerConfig.Create('${time} - ${request_method} ${request_path_info} ${exception}', '/var/log/horse');
+  //HorseExceptionLoggerConfig := THorseExceptionLoggerConfig.Create('${time} - ${request_method} ${request_path_info} ${exception}', true); //write to console instead
+  THorse.Use(THorseExceptionLogger.New(HorseExceptionLoggerConfig));
 
   THorse.Get('/raise',
     procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
