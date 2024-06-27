@@ -122,6 +122,7 @@ var
     LLog := LLog.Replace('${response_content_version}', THorseExceptionLogger.ValidateValue(AResponse.RawWebResponse.ContentVersion));
     {$ENDIF}
     LLog := LLog.Replace('${exception}', THorseExceptionLogger.ValidateValue(LJSON.ToJSON));
+    LJSON.Free;
   end;
 begin
   LBeforeDateTime := Now();
